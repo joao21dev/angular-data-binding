@@ -1,0 +1,20 @@
+<label>Server Name</label>
+<label>EEVENT BINDING</label>
+<input (input)="onUpdateServerName($event)" type="text" class="form-control" />
+<label>TWO WAY DATA BINDING</label>
+<!--pesquisar amanhã sobre binding no chatgpt-->
+<input
+  type="text"
+  [(ngModel)]="serverName"
+  class="form-control"
+/>
+<p>Nome do servidor é: {{ serverName }}</p>
+<button
+  (click)="onCreateServer()"
+  [disabled]="!allowServer"
+  class="btn btn-primary"
+>
+  Add Server
+</button>
+<Label>INTERPOLATION STRING</Label>
+<p>{{ serverCreationStatus }}</p>
