@@ -6,9 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./server.component.css'],
 })
 export class ServerComponent implements OnInit {
-  allowServer = false;
-  serverName = '';
-  serverCreationStatus = 'No server was created';
+  allowServer: boolean = false;
+  serverName: string = '';
+  serverCreated: boolean = false;
+  serverCreationStatus: string = 'No server was created';
+  serverStatus: string = 'offline';
 
   constructor() {
     setTimeout(() => {
@@ -18,11 +20,24 @@ export class ServerComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onCreateServer() {
+  onCreateServer(): void {
     this.serverCreationStatus = 'Server was created';
+    this.serverCreated = true;
   }
 
-  onUpdateServerName(event: Event) {
+  onUpdateServerName(event: Event): void {
     this.serverName = (<HTMLInputElement>event.target).value;
+  }
+
+  getServerStatus(): string {
+    return (this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline');
+  }
+
+  getColor(): string {
+    if (this.serverStatus === 'online') {
+      return 'green';
+    } else {
+      return 'red';
+    }
   }
 }

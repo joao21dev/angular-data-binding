@@ -3,12 +3,13 @@
 <input (input)="onUpdateServerName($event)" type="text" class="form-control" />
 <label>TWO WAY DATA BINDING</label>
 <!--pesquisar amanhã sobre binding no chatgpt-->
-<input
-  type="text"
-  [(ngModel)]="serverName"
-  class="form-control"
-/>
-<p>Nome do servidor é: {{ serverName }}</p>
+<input type="text" [(ngModel)]="serverName" class="form-control" />
+<p>
+  Nome do servidor é: {{ serverName }} e seu status é
+  <span [ngStyle]="{ color: getColor() }">
+    {{ serverStatus }}
+  </span>
+</p>
 <button
   (click)="onCreateServer()"
   [disabled]="!allowServer"
@@ -16,5 +17,12 @@
 >
   Add Server
 </button>
+<button (click)="getServerStatus()" class="btn btn-secondary">
+  Check Server Status
+</button>
+<br />
 <Label>INTERPOLATION STRING</Label>
-<p>{{ serverCreationStatus }}</p>
+<p *ngIf="serverCreated; else noServer">{{ serverCreationStatus }}</p>
+<ng-template #noServer>
+  <p>No server created</p>
+</ng-template>
